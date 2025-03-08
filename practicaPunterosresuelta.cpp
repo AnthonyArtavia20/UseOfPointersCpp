@@ -91,13 +91,31 @@ void investigarUnPunteroSinInicializar() {
   //por lo que el valor que se imprime es el valor que se encuentra en esa dirección de memoria.
 }
 
+void mallocList() { // Declarar lista de 25 elementos con malloc, luego otorgarle numeros aleatorios acada uno y finalmente imprimir
+
+  srand(time(0)); //Inicializar el generador de números aleatorios:
+
+  int *lista = (int*)malloc(25*sizeof(int));
+
+  for (int i = 0; i < 25; i++) {
+    lista[i] = rand();
+  }
+  //imprimir cada elemento para confirmar los números randoms
+  for (int i = 0; i < 25; i++) {
+    cout << "Elemento con número random: " << lista[i] << endl;
+  }
+  free(lista);
+}
+
 int main() {
   //Ejercicio 1
   //declararEInicializarPunteros();
   //Ejercicio 2
   //intercambioDePosicionMemoria();
   //Ejercicio 3
-  investigarUnPunteroSinInicializar();
+  //investigarUnPunteroSinInicializar();
+  //Ejercicio 4
+  //mallocList();
 
   return 0;
 }
