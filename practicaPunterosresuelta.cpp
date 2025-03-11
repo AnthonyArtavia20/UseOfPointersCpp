@@ -107,15 +107,140 @@ void mallocList() { // Declarar lista de 25 elementos con malloc, luego otorgarl
   free(lista);
 }
 
+void listaConAritmeticaPunterosInt() { //Utilizaré aritmética de punteros para recorrer una lista.
+  srand(time(0));
+
+  int *lista = (int*)malloc(25*sizeof(int));
+  for (int i = 0; i < 25; i++) {
+    *(lista + i) = rand();
+  }
+
+  for (int i = 0; i < 25; i++) {
+    cout << "Elemento printeado con aritmética de punteros: " << *(lista + i) << endl;
+  }
+
+  free(lista);
+}
+
+void listaConAritmeticaPunterosDouble() {
+  srand(time(0));
+
+  double *lista = (double*)malloc(25*sizeof(double));
+  for (int i = 0; i < 25; i++ ) {
+    *(lista + 1) = rand();
+  }
+  for(int i = 0; i  < 25; i++) {
+    cout << "Elemento double printeado con aritmética de punteros: " << *(lista + i) << endl;
+  }
+
+  free(lista);
+}
+
+void explicacionDelContadorEnEjercicio6y7(){
+  /*
+    En los ejercicios 6 y 7  pasados, se realizó la creación de dos listas, una enteros y otra de doubles
+    estas a pesar de ser tipos de datos distintos, se pueden iterar simplemente haciendo puntero++, pues
+    el contador de punteros se encarga de incrementar la cantidad de bytes necesarios para llegar al siguiente
+    elemento de la lista, por lo que no importa si la lista es de enteros, doubles, chars, etc, el puntero
+    se encargará de incrementar la cantidad de bytes necesarios para llegar al siguiente elemento de la lista.
+
+    resumen: Lo hace automático según el tipo de datos.
+  */
+}
+
+bool cambiarPorNumeroAleatorioUsandoUnPuntero(int* punteroAlNumero) {
+  srand(time(0)); //Inicializar el generador de números aleatorios
+
+  if (punteroAlNumero == NULL) { // comprobar que el puntero venga vacío
+    return false;
+  }
+
+  *punteroAlNumero = rand(); // Desreferenciamos  el puntero para acceder al valor que almacena.
+  cout << "El número random es: " << *punteroAlNumero << endl;
+
+  return true;
+}
+
+//----------------------------------------Ejercicio 9(start) --------------------------------------------------------------
+struct mallocStruct { //definición de la estructura  a operar
+  int a;
+  unsigned int b;
+  double c;
+};
+
+void cambioDeLosDatosParte2(mallocStruct* punteroALaEstructura) { // encargada de recibir el puntero a la estructura, acceder a ella y cambiar los datos por otros aleatorios
+  if (punteroALaEstructura == nullptr) { // Comprobar si el puntero es NULL
+      cerr << "Error: puntero a la estructura es NULL.\n";
+      return;
+  }
+
+  cout << "Valores originales de la estructura:" << endl;
+  cout << "a: " << punteroALaEstructura->a << endl;
+  cout << "b: " << punteroALaEstructura->b << endl;
+  cout << "c: " << punteroALaEstructura->c << endl;
+
+  // Asignar nuevos valores aleatorios
+  punteroALaEstructura->a = rand();
+  punteroALaEstructura->b = rand();
+  punteroALaEstructura->c = (double)rand() / RAND_MAX; // Número aleatorio entre 0 y 1
+
+  cout << "Nuevos valores de la estructura:" << endl;
+  cout << "a: " << punteroALaEstructura->a << endl;
+  cout << "b: " << punteroALaEstructura->b << endl;
+  cout << "c: " << punteroALaEstructura->c << endl;
+}
+
+void creacionDeStructurasParte1() {
+  srand(time(0)); // Inicializar el generador de números aleatorios
+
+  // Reservar memoria para la estructura
+  mallocStruct* estructura = (mallocStruct*)malloc(sizeof(mallocStruct));
+
+  if (estructura == nullptr) { // Comprobar si malloc falló
+      cerr << "Error: No se pudo asignar memoria para la estructura.\n";
+      return;
+  }
+
+  // Asignar valores aleatorios
+  estructura->a = rand();
+  estructura->b = rand();
+  estructura->c = (double)rand() / RAND_MAX; // Número aleatorio entre 0 y 1
+
+  cout << "Valores de la estructura inicial:" << endl;
+  cout << "a: " << estructura->a << endl;
+  cout << "b: " << estructura->b << endl;
+  cout << "c: " << estructura->c << endl;
+
+  cout << "Cambio de los datos a nuevos aleatorios..." << endl;
+  cambioDeLosDatosParte2(estructura);
+
+  // Liberar memoria
+  free(estructura);
+}
+//----------------------------------------Ejercicio 9(end) --------------------------------------------------------------
+
 int main() {
-  //Ejercicio 1
+    //Ejercicio 1
   //declararEInicializarPunteros();
-  //Ejercicio 2
+    //Ejercicio 2
   //intercambioDePosicionMemoria();
-  //Ejercicio 3
+    //Ejercicio 3
   //investigarUnPunteroSinInicializar();
-  //Ejercicio 4
+    //Ejercicio 4
   //mallocList();
+
+    //Ejercicio 5
+  //listaConAritmeticaPunterosInt();
+    //Ejercicio 6
+  //listaConAritmeticaPunterosDouble();
+    //Ejercicio 7
+  //explicacionDelContadorEnEjercicio6y7();
+    //Ejercicio 8
+  //int a = 8;
+  //int *puntero = &a;
+  //cambiarPorNumeroAleatorioUsandoUnPuntero(puntero);
+    //Ejercicio 9
+  creacionDeStructurasParte1();
 
   return 0;
 }
