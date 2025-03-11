@@ -219,6 +219,48 @@ void creacionDeStructurasParte1() {
 }
 //----------------------------------------Ejercicio 9(end) --------------------------------------------------------------
 
+//----------------------------------------Ejercicio 10(start) --------------------------------------------------------------
+struct structForLists {
+  int *listaEnteros;
+  double *listaDobles;
+};
+
+void inicializarListas(structForLists* estructura){ //Recibe un puntero a la estructura y se encarga de inicializar las listas con valores aleatorios
+  srand((time(0))); //Inicializar el generador de números aleatorios
+
+  //Reservar memoria para las listas:
+  estructura->listaEnteros = (int*)malloc(25*sizeof(int));
+  estructura->listaDobles = (double*)malloc(25*sizeof(double));
+
+  if (estructura->listaEnteros == nullptr || estructura->listaDobles == nullptr) { // Comprobar si malloc falló
+      cerr << "Error: No se pudo asignar memoria para las listas.\n";
+      return;
+  }
+
+  // Asignar valores aleatorios a las listas:
+  for (int i = 0; i < 25; i++) {
+    *(estructura->listaEnteros + i) = rand();
+    *(estructura->listaDobles + i) = (double)rand();
+  }
+
+  //Imprimir los valores en las listas;
+  cout << "Valores de la lista de enteros:" << endl;
+  for (int i = 0; i < 25; i++) {
+    cout << *(estructura->listaEnteros + i) << " ";
+  }
+  cout << endl;
+
+  cout << "Valores de la lista de doubles:" << endl;
+  for (int i = 0; i < 25; i++) {
+    cout << *(estructura->listaDobles + i) << " ";
+  }
+  cout << endl;
+
+  free(estructura->listaEnteros);
+  free(estructura->listaDobles);
+}
+//----------------------------------------Ejercicio 10(End) --------------------------------------------------------------
+
 int main() {
     //Ejercicio 1
   //declararEInicializarPunteros();
@@ -240,7 +282,10 @@ int main() {
   //int *puntero = &a;
   //cambiarPorNumeroAleatorioUsandoUnPuntero(puntero);
     //Ejercicio 9
-  creacionDeStructurasParte1();
+  //creacionDeStructurasParte1();
+    //Ejercicio 10
+  structForLists estructura;
+  inicializarListas(&estructura);
 
   return 0;
 }
