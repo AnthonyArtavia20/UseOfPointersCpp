@@ -1,7 +1,7 @@
 #include <iostream> // biblioteca para entrada y salida de datos
 #include <cstdio> // biblioteca para printf
 #include <cstdlib> // biblioteca para srand y rand
-#include <ctime> // biblioteca para time
+#include <ctime> // biblioteca para time y randoms.
 
 using namespace std; // para no tener que escribir std:: antes de cada cout o cin
 
@@ -239,7 +239,7 @@ void inicializarListas(structForLists* estructura){ //Recibe un puntero a la est
 
   // Asignar valores aleatorios a las listas:
   for (int i = 0; i < 25; i++) {
-    *(estructura->listaEnteros + i) = rand();
+    *(estructura->listaEnteros + i) = rand(); // Para el uso de aritmética de punteros se encierra así: *(bla bla), como hacer aritmetica de punteros da la dirección de I -ésimo elemento de la lista, hay que desreferenciarlo para obtener el valor de ese I -ésimo-
     *(estructura->listaDobles + i) = (double)rand();
   }
 
@@ -260,6 +260,15 @@ void inicializarListas(structForLists* estructura){ //Recibe un puntero a la est
   free(estructura->listaDobles);
 }
 //----------------------------------------Ejercicio 10(End) --------------------------------------------------------------
+
+void formaEfectivaParaMeterAleatoriosALista() {
+
+  int a = random() % 100; // [0, 99]
+
+  printf("%d\n", a);
+
+}
+
 
 int main() {
     //Ejercicio 1
@@ -284,8 +293,10 @@ int main() {
     //Ejercicio 9
   //creacionDeStructurasParte1();
     //Ejercicio 10
-  structForLists estructura;
-  inicializarListas(&estructura);
+  //structForLists estructura;
+  //inicializarListas(&estructura);
+    //Forma efectiva de limitar los randoms
+  //formaEfectivaParaMeterAleatoriosALista();
 
   return 0;
 }
